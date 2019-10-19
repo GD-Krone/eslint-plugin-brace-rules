@@ -45,7 +45,7 @@ In the example below:
   - `export default class MyClass { ... }`
   - `export default class { ... }`
   - `export default function { ... }`
-```json
+```
 {
     "rules": {
         ...,
@@ -68,7 +68,7 @@ In the example below:
 ## Supported Rules
 
 The basic schema for the `brance-on-same-line` is as follows:
-```json
+```
 "brace-rules/brace-on-same-line": [
     ${standard eslint error levels, int/string-based},
 (( schema ))
