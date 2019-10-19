@@ -95,19 +95,54 @@ ruleTester.run("brace-on-same-line", rule, {
             options: ["allman"]
         },
 
-        // individual options
+        // // individual options
+        { code: "foo(function(){\n});", options: [{ FunctionExpression: "always" }]},
+        { code: "foo(function()\n{\n});", options: [{ FunctionExpression: "never" }]},
+        { code: "foo(function(){\n});\nfoo(function()\n{\n});", options: [{ FunctionExpression: "ignore" }]},
+
+        { code: "var foo=()=>{\nreturn;\n}", parserOptions: { ecmaVersion: 6 }, options: [{ ArrowFunctionExpression: "always" }]},
+        { code: "var foo=()=>\n{\nreturn;\n}", parserOptions: { ecmaVersion: 6 }, options: [{ ArrowFunctionExpression: "never" }]},
+        { code: "var foo=()=>{\nreturn;\n};\nvar bar=()=>\n{\nreturn;\n}", parserOptions: { ecmaVersion: 6 }, options: [{ ArrowFunctionExpression: "ignore" }]},
+
+        // functions
         { code: "function foo(){\n}", options: [{ FunctionDeclaration: "always" }] },
         { code: "function foo()\n{\n}", options: [{ FunctionDeclaration: "never" }] },
         { code: "function foo()\n{\n}\nfunction foo2(){\n}", options: [{ FunctionDeclaration: "ignore" }] },
 
-        { code: "foo(function(){\n});", options: [{ FunctionExpression: "always" }]},
-        { code: "foo(function()\n{\n});", options: [{ FunctionExpression: "never" }]},
-        { code: "foo(function(){\n});\nfoo(function()\n{\n});", options: [{ FunctionExpression: "ignore" }]},
-        
-        { code: "var foo=()=>{\nreturn;\n}", parserOptions: { ecmaVersion: 6 }, options: [{ ArrowFunctionExpression: "always" }]},
-        { code: "var foo=()=>\n{\nreturn;\n}", parserOptions: { ecmaVersion: 6 }, options: [{ ArrowFunctionExpression: "never" }]},
-        { code: "var foo=()=>{\nreturn;\n};\nvar bar=()=>\n{\nreturn;\n}", parserOptions: { ecmaVersion: 6 }, options: [{ ArrowFunctionExpression: "ignore" }]},
-        
+        // export default named functions
+        { code: "export default function foo(){\n}", parserOptions: { ecmaVersion: 6, sourceType: "module" }, options: [{ ExportFunction: "always" }]},
+        { code: "export default function foo()\n{\n}", parserOptions: { ecmaVersion: 6, sourceType: "module" }, options: [{ ExportFunction: "never" }]},
+        { code: "export default function foo()\n{\n}\nexport default function foo2(){\n}", parserOptions: { ecmaVersion: 6, sourceType: "module" }, options: [{ ExportFunction: "ignore" }]},
+
+        // export named functions
+        { code: "export function foo(){\n}", parserOptions: { ecmaVersion: 6, sourceType: "module" }, options: [{ ExportFunction: "always" }]},
+        { code: "export function foo()\n{\n}", parserOptions: { ecmaVersion: 6, sourceType: "module" }, options: [{ ExportFunction: "never" }]},
+        { code: "export function foo()\n{\n}\nexport function foo2(){\n}", parserOptions: { ecmaVersion: 6, sourceType: "module" }, options: [{ ExportFunction: "ignore" }]},
+
+        // export anon functions
+        { code: "export default function(){\n}", parserOptions: { ecmaVersion: 6, sourceType: "module" }, options: ["stroustrup", { ExportFunctionAnon: "always" }]},
+        { code: "export default function()\n{\n}", parserOptions: { ecmaVersion: 6, sourceType: "module" }, options: ["stroustrup", { ExportFunctionAnon: "never" }]},
+        { code: "export default function()\n{\n}\nexport default function(){\n}", parserOptions: { ecmaVersion: 6, sourceType: "module" }, options: ["stroustrup", { ExportFunctionAnon: "ignore" }]},
+
+        // classes
+        { code: "class MyClass{\nfoo(){\n}\n}", parserOptions: { ecmaVersion: 6 }, options: ["stroustrup", { ClassDeclaration: "always", ExportClass: "never", ExportClassAnon: "never" }]},
+        { code: "class MyClass\n{\nfoo(){\n}\n}", parserOptions: { ecmaVersion: 6 }, options: ["stroustrup", { ClassDeclaration: "never", ExportClass: "always", ExportClassAnon: "never" }]},
+        { code: "class MyClass\n{\nfoo(){\n}\n}\nclass MyClass2{\nfoo(){\n}\n}", parserOptions: { ecmaVersion: 6 }, options: ["stroustrup", { ClassDeclaration: "ignore", ExportClass: "never", ExportClassAnon: "never" }]},
+
+        // export default named classes
+        { code: "export default class MyClass{\nfoo(){\n}\n}", parserOptions: { ecmaVersion: 6, sourceType: "module" }, options: ["stroustrup", { ClassDeclaration: "never", ExportClass: "always", ExportClassAnon: "never" }]},
+        { code: "export default class MyClass\n{\nfoo(){\n}\n}", parserOptions: { ecmaVersion: 6, sourceType: "module" }, options: ["stroustrup", { ClassDeclaration: "always", ExportClass: "never", ExportClassAnon: "never" }]},
+        { code: "export default class MyClass\n{\nfoo(){\nreturn;\n}\n}\nexport default class MyClass2{\nfoo(){\nreturn;\n}\n}", parserOptions: { ecmaVersion: 6, sourceType: "module" }, options: ["stroustrup", { ClassDeclaration: "always", ExportClass: "ignore", ExportClassAnon: "never" }]},
+
+        // export named classes
+        { code: "export class MyClass{\nfoo(){\n}\n}", parserOptions: { ecmaVersion: 6, sourceType: "module" }, options: ["stroustrup", { ClassDeclaration: "never", ExportClass: "always", ExportClassAnon: "never" }]},
+        { code: "export class MyClass\n{\nfoo(){\n}\n}", parserOptions: { ecmaVersion: 6, sourceType: "module" }, options: ["stroustrup", { ClassDeclaration: "always", ExportClass: "never", ExportClassAnon: "never" }]},
+        { code: "export class MyClass\n{\nfoo(){\n}\n}\nexport default class MyClass2{\nfoo(){\n}\n}", parserOptions: { ecmaVersion: 6, sourceType: "module" }, options: ["stroustrup", { ClassDeclaration: "always", ExportClass: "ignore", ExportClassAnon: "never" }]},
+
+        // export anon classes
+        { code: "export default class{\nfoo(){\n}\n}", parserOptions: { ecmaVersion: 6, sourceType: "module" }, options: ["stroustrup", { ClassDeclaration: "never", ExportClass: "never", ExportClassAnon: "always" }]},
+        { code: "export default class\n{\nfoo(){\n}\n}", parserOptions: { ecmaVersion: 6, sourceType: "module" }, options: ["stroustrup", { ClassDeclaration: "always", ExportClass: "always", ExportClassAnon: "never" }]},
+        { code: "export default class{\nfoo(){\n}\n}\nexport default class\n{\nfoo(){\n}\n}", parserOptions: { ecmaVersion: 6, sourceType: "module" }, options: ["stroustrup", { ClassDeclaration: "never", ExportClass: "never", ExportClassAnon: "ignore" }]},
     ],
 
     invalid: [
