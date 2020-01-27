@@ -1,6 +1,9 @@
-# eslint-plugin-brace-rules
+# @saji/eslint-plugin-brace-rules
 
 Enhancements to eslint's default `brace-style` rules
+
+Originally created by [Joshua Searles](https://github.com/jrsearles)
+with modifications by [Jason Keimig](https://github.com/j5kay).
 
 ## Installation
 
@@ -10,13 +13,13 @@ You'll first need to install [ESLint](http://eslint.org):
 $ npm i eslint --save-dev
 ```
 
-Next, install `eslint-plugin-brace-rules`:
+Next, install `@saji/eslint-plugin-brace-rules`:
 
 ```
-$ npm install eslint-plugin-brace-rules --save-dev
+$ npm install @saji/eslint-plugin-brace-rules --save-dev
 ```
 
-**Note:** If you installed ESLint globally (using the `-g` flag) then you must also install `eslint-plugin-brace-rules` globally.
+**Note:** If you installed ESLint globally (using the `-g` flag) then you must also install `@saji/eslint-plugin-brace-rules` globally.
 
 ## Usage
 
@@ -25,7 +28,7 @@ Add `brace-rules` to the plugins section of your `.eslintrc` configuration file.
 ```json
 {
     "plugins": [
-        "brace-rules"
+        "@saji/brace-rules"
     ]
 }
 ```
@@ -37,7 +40,7 @@ Then, modify your `.eslintrc` config with the following updates:
 
 In the example below:
 - All internal `brace-style` checks are disabled
-- All `brace-rules/brace-on-same-line` violations are flagged as errors
+- All `@saji/brace-rules/brace-on-same-line` violations are flagged as errors
 - The baseline brace styling is `stroustrup`
 - `brace on next-line` overrides are added for occurances of:
   - `class { ... }`
@@ -50,7 +53,7 @@ In the example below:
     "rules": {
         ...,
         "brace-style": 0,
-        "brace-rules/brace-on-same-line": [
+        "@saji/brace-rules/brace-on-same-line": [
             "error",
             "stroustrup",
             {
@@ -69,7 +72,7 @@ In the example below:
 
 The basic schema for the `brance-on-same-line` is as follows:
 ```
-"brace-rules/brace-on-same-line": [
+"@saji/brace-rules/brace-on-same-line": [
     ${standard eslint error levels, int/string-based},
 (( schema ))
     {
@@ -136,8 +139,3 @@ Most of the brace rules are self-explanatary:
 - **`TryStatement`**
 - **`WhileStatement`**
 - **`WithStatement`**
-
-
-
-
-

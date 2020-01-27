@@ -1,5 +1,5 @@
 {
-  "name": "eslint-plugin-brace-rules",
+  "name": "@saji/eslint-plugin-brace-rules",
   "version": "0.2.0",
   "description": "Enhancements to eslint brace rules",
   "keywords": [
@@ -7,8 +7,16 @@
     "eslintplugin",
     "eslint-plugin"
   ],
-  "author": "Joshua Searles",
+  "author": "Marek Augustynowicz <marek.aug@gmail.com>",
+  "contributors": [
+    "Joshua Searles",
+    "Jason Keimig"
+  ],
   "main": "lib/index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/marek-saji/eslint-plugin-brace-rules.git"
+  },
   "scripts": {
     "test": "mocha tests --recursive"
   },
