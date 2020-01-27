@@ -125,12 +125,13 @@ Most of the brace rules are self-explanatary:
 - **`ExportClassAnon`**: Adjusts brace formatting for `export default class` declarations (overriding any _`ClassDeclaration`_ and _`ExportClass`_ settings)
 - **`ExportFunction`**: Adjusts brace formatting for `export function MyFunction` or `export default function MyFunction` declarations (overriding any _`FunctionDeclaration`_ setting)
 - **`ExportFunctionAnon`**: Adjusts brace formatting for `export default function` declarations (overriding any _`FunctionDeclaration`_ and _`ExportFunction`_ settings)
-- **`ForStatement`**
 - **`ForInStatement`**
 - **`ForOfStatement`**
+- **`ForStatement`**
 - **`FunctionDeclaration`**
 - **`FunctionExpression`**
 - **`IfStatement`**
+- **`MethodDeclaration`**: Adjusts brace formatting for class method declaration
 - **`SwitchStatement`**
 - **`TryStatement`**
 - **`WhileStatement`**
